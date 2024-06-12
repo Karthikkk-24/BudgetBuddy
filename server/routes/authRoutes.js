@@ -6,8 +6,9 @@ const authRouter = express.Router();
 
 authRouter.post('/registerUser', async (req, res) => {
     try {
-        const { name, email, password } = req.body;
-        const newUser = new User({ name, email, password });
+        const { username, email, password } = req.body;
+        console.log('req.body', req.body);
+        const newUser = new User({ username, email, password });
         await newUser.save();
         res.status(201).json(newUser);
     } catch (err) {
