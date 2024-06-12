@@ -21,8 +21,9 @@ export default function Register() {
 
             console.log(response.data);
 
-            navigate('/login');
-
+            if (response.status === 201) {
+                navigate('/login');
+            }
 
         } catch (error) {
             console.log(error);
