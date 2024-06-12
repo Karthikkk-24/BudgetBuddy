@@ -1,11 +1,21 @@
-import "./App.css";
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import './App.css';
+import Login from './components/Login';
+import Main from './components/Main';
+import Register from './components/Register';
 
 function App() {
-  return (
-    <>
-      <h4 className="text-5xl">Hello</h4>
-    </>
-  );
+    return (
+        <>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<Main />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                </Routes>
+            </Router>
+        </>
+    );
 }
 
 export default App;
