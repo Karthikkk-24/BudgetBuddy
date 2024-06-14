@@ -8,6 +8,8 @@ export default function Sidebar() {
             <SidebarItem title="Expenses" icon="💰" route={'/expenses'} />
             <SidebarItem title="Categories" icon="📋" route={'/categories'} />
             <SidebarItem title="Cashbook" icon="📕" route={'/cashbook'} />
+            <SidebarItem title="TodoList" icon="📕" route={'/todo-list'} />
+            <SidebarItem title="Completed" icon="📕" route={'/completed'} />
         </div>
     );
 }
