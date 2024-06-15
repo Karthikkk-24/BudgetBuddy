@@ -17,7 +17,9 @@ export default function Login() {
 
             console.log(response.data);
             if (response.status === 200) {
-                localStorage.setItem('token', response.data.token);
+                localStorage.clear();
+                localStorage.setItem('user', response.data.token);
+                localStorage.setItem('user_id', response.data.user.uniqueId);
                 window.location.href = '/main';
             }
 

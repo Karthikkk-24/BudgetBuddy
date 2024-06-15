@@ -1,25 +1,27 @@
 import mongoose from 'mongoose';
 
-const userSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
     },
+    uniqueId: {
+        type: String,
+        required: true
+    },
     email: {
         type: String,
         required: true,
-        unique: true,
+        unique: true
     },
     password: {
         type: String,
-        required: true,
+        required: true
     },
     createdAt: {
         type: Date,
-        default: Date.now,
-    },
+        default: Date.now
+    }
 });
 
-const User = mongoose.model('users', userSchema);
-
-export default User;
+export default mongoose.model('users', UserSchema);

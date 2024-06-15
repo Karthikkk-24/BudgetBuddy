@@ -7,7 +7,7 @@ export default function Main() {
     }, [])
 
     function checkLogin() {
-        if (!localStorage.getItem('token')) {
+        if (!localStorage.getItem('user')) {
             window.location.href = '/login';
         } else {
             window.location.href = '/dashboard';

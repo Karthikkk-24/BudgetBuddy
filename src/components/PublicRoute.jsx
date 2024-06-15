@@ -1,7 +1,24 @@
+import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 
 const PublicRoute = () => {
+
+    useEffect(() => {
+        checkLogin();
+    }, []);
+
+    function checkLogin() {
+        if (localStorage.getItem('user')) {
+            // window.location.href = '/dashboard';
+        } else {
+            localStorage.clear();
+            sessionStorage.clear();
+            window.location.href = '/login';
+        }
+    }
+
+
     return (
         <div className="w-screen h-screen flex flex-col items-center justify-center">
             <div className="w-full h-full flex items-start justify-start">
