@@ -6,10 +6,17 @@ import TodoItem from "./TodoItem";
 export default function TodoList() {
 
     const [todoTitle, setTodoTitle] = useState('');
+    const [allTodos, setAllTodos] = useState([]);
+
     const user = localStorage.getItem('user_id');
 
     const handleSubmit = async () => {
         try {
+
+            if (!todoTitle) {
+                return;
+            }
+
             const response = await axios.post(`${Serverport()}/api/users/insertTodo`, {
                 todoTitle,
                 user
@@ -17,9 +24,10 @@ export default function TodoList() {
 
             if (response.status === 201) {
                 setTodoTitle('');
+                fetchTodos();
+            } else {
+                console.log('error');
             }
-
-            console.log('handleSubmit');
         } catch (error) {
             console.log(error);
         }
@@ -33,7 +41,15 @@ export default function TodoList() {
 
     const fetchTodos = async () => {
         try {
-            console.log('fetchTodos');
+            const response = await axios.post(`${Serverport()}/api/users/getPendingTodos`, {
+                user
+            });
+
+            if (response.status === 200) {
+                console.log(response.data);
+                setAllTodos(response.data.getTodos);
+            }
+
         } catch (error) {
             console.log(error);
         }
@@ -78,8 +94,9 @@ export default function TodoList() {
                     </button>
                 </div>
                 <div className="w-full h-auto grid mt-10 grid-cols-3 gap-3">
-                    <TodoItem title="Todo" status={false} id={1}  />
-                    <TodoItem title="Todo" status={true} id={1}  />
+                    {allTodos.map((todo) => (
+                        <TodoItem title={todo.title} status={(todo.status == 'pending') ? false : true} id={todo.id} key={todo._id} />
+                    ))}
                 </div>
             </div>
         </div>

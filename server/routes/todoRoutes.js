@@ -18,6 +18,22 @@ todoRouter.post('/insertTodo', async (req, res) => {
         console.log(error);
         res.status(500).json({ message: error.message });
     }
-})
+});
+
+todoRouter.post('/getPendingTodos', async (req, res) => {
+    try {
+        const { user } = req.body;
+
+        const getTodos = await TodoModel.find({
+            username: user, 
+            status: 'pending'
+        });
+
+        res.status(200).json({ getTodos });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error.message });
+    }
+});
 
 export default todoRouter;

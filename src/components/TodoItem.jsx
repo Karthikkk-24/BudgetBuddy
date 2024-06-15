@@ -58,6 +58,6 @@ export default function TodoItem({ title, status, id }) {
 
 TodoItem.propTypes = {
     title: PropTypes.string,
-    status: PropTypes.string,
+    status: PropTypes.bool,
     id: PropTypes.number,
 };
