@@ -1,18 +1,32 @@
+import axios from 'axios';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
+import Serverport from './Serverport';
 
 export default function TodoItem({ title, status, id }) {
 
-    const setStatus = () => {
+    const [checkStatus, setCheckStatus] = useState(status);
+
+    const toggleStatus = async() => {
         try {
-            if (status) {
-                console.log('true');
-            } else {
-                console.log('false');
+            const newStatus = !status;
+            setCheckStatus(newStatus);
+            console.log('status', newStatus);
+            const response = await axios.post(`${Serverport()}/api/users/updateTodo`, {
+                id,
+                status: 'completed'
+            });
+
+            console.log(response.data);
+
+            if (response.status === 200) {
+                console.log(response.data);
             }
+
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
     const handleDelete = (param) => {
         try {
@@ -27,8 +41,8 @@ export default function TodoItem({ title, status, id }) {
         <div className="w-full h-12 flex pl-5 cursor-pointer text-white bg-primary font-semibold text-lg items-center justify-start gap-3 hover:bg-slate-800 rounded-3xl relative">
             <input
                 type="checkbox"
-                checked={status}
-                onChange={(e) => setStatus(e.target.checked)}
+                checked={checkStatus}
+                onChange={toggleStatus}
                 className="w-5 h-5 rounded-full border-2"
             />
             <span>{title}</span>

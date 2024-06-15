@@ -95,7 +95,7 @@ export default function TodoList() {
                 </div>
                 <div className="w-full h-auto grid mt-10 grid-cols-3 gap-3">
                     {allTodos.map((todo) => (
-                        <TodoItem title={todo.title} status={(todo.status == 'pending') ? false : true} id={todo.id} key={todo._id} />
+                        <TodoItem title={todo.title} status={(todo.status == 'pending') ? false : true} id={todo._id} key={todo._id} />
                     ))}
                 </div>
             </div>

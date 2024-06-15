@@ -36,4 +36,16 @@ todoRouter.post('/getPendingTodos', async (req, res) => {
     }
 });
 
+todoRouter.post('/updateTodo', async (req, res) => {
+    try {
+        const { id, status } = req.body;
+        console.log('id', id, 'status', status);
+        const updateTodo = await TodoModel.findByIdAndUpdate(id, { status });
+        res.status(200).json({ updateTodo });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error.message });
+    }
+});
+
 export default todoRouter;
