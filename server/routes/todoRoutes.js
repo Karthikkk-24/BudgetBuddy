@@ -36,6 +36,22 @@ todoRouter.post('/getPendingTodos', async (req, res) => {
     }
 });
 
+todoRouter.post('/getCompletedTodos', async (req, res) => {
+    try {
+        const { user } = req.body;
+
+        const getTodos = await TodoModel.find({
+            username: user, 
+            status: 'completed'
+        });
+
+        res.status(200).json({ getTodos });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error.message });
+    }
+});
+
 todoRouter.post('/updateTodo', async (req, res) => {
     try {
         const { id, status } = req.body;
