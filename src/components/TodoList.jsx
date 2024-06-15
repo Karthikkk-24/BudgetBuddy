@@ -1,15 +1,24 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
+import Serverport from "./Serverport";
 import TodoItem from "./TodoItem";
 
 export default function TodoList() {
 
     const [todoTitle, setTodoTitle] = useState('');
+    const user = localStorage.getItem('user_id');
 
     const handleSubmit = async () => {
         try {
-            // const response = await axios.post(`${Serverport()}/api/users/insertTodo`, {
-            //     title
-            // });
+            const response = await axios.post(`${Serverport()}/api/users/insertTodo`, {
+                todoTitle,
+                user
+            });
+
+            if (response.status === 201) {
+                setTodoTitle('');
+            }
+
             console.log('handleSubmit');
         } catch (error) {
             console.log(error);
@@ -71,11 +80,6 @@ export default function TodoList() {
                 <div className="w-full h-auto grid mt-10 grid-cols-3 gap-3">
                     <TodoItem title="Todo" status={false} id={1}  />
                     <TodoItem title="Todo" status={true} id={1}  />
-                    <TodoItem />
-                    <TodoItem />
-                    <TodoItem />
-                    <TodoItem />
-                    <TodoItem />
                 </div>
             </div>
         </div>

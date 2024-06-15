@@ -20,7 +20,7 @@ mongoose.connect('mongodb://localhost:27017/budgetbuddy', {
 .catch(err => console.log('Error connecting to MongoDB:', err));
 
 app.use('/api/users', authRouter);
-app.use('/api/todos', todoRouter);
+app.use('/api/users', todoRouter);
 
 const PORT = 3000;
 
