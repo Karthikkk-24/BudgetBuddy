@@ -13,6 +13,9 @@ const todoSchema = new mongoose.Schema({
         type: String,
         default: 'pending',
     },
+    date: {
+        type: String,
+    },
     createdAt: {
         type: Date,
         default: Date.now,

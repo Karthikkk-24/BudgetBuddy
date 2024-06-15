@@ -1,26 +1,36 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import Serverport from "./Serverport";
-import TodoItem from "./TodoItem";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import Serverport from './Serverport';
+import TodoItem from './TodoItem';
 
 export default function TodoList() {
-
     const [todoTitle, setTodoTitle] = useState('');
     const [allTodos, setAllTodos] = useState([]);
 
     const user = localStorage.getItem('user_id');
 
+    const getFormattedDate = () => {
+        const date = new Date();
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
+
     const handleSubmit = async () => {
         try {
-
             if (!todoTitle) {
                 return;
             }
 
-            const response = await axios.post(`${Serverport()}/api/users/insertTodo`, {
-                todoTitle,
-                user
-            });
+            const response = await axios.post(
+                `${Serverport()}/api/users/insertTodo`,
+                {
+                    todoTitle,
+                    user,
+                    date: getFormattedDate(),
+                }
+            );
 
             if (response.status === 201) {
                 setTodoTitle('');
@@ -31,29 +41,31 @@ export default function TodoList() {
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
             handleSubmit();
         }
-    }
+    };
 
     const fetchTodos = async () => {
         try {
-            const response = await axios.post(`${Serverport()}/api/users/getPendingTodos`, {
-                user
-            });
+            const response = await axios.post(
+                `${Serverport()}/api/users/getPendingTodos`,
+                {
+                    user,
+                }
+            );
 
             if (response.status === 200) {
                 console.log(response.data);
                 setAllTodos(response.data.getTodos);
             }
-
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
     useEffect(() => {
         fetchTodos();
@@ -74,7 +86,10 @@ export default function TodoList() {
                         onChange={(e) => setTodoTitle(e.target.value)}
                         placeholder="Add new task"
                     />
-                    <button onClick={handleSubmit} className="w-12 h-12 bg-primary hover:scale-110 transition-all text-white flex items-center justify-center font-semibold rounded-full">
+                    <button
+                        onClick={handleSubmit}
+                        className="w-12 h-12 bg-primary hover:scale-110 transition-all text-white flex items-center justify-center font-semibold rounded-full"
+                    >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
@@ -95,7 +110,12 @@ export default function TodoList() {
                 </div>
                 <div className="w-full h-auto grid mt-10 grid-cols-3 gap-3">
                     {allTodos.map((todo) => (
-                        <TodoItem title={todo.title} status={(todo.status == 'pending') ? false : true} id={todo._id} key={todo._id} />
+                        <TodoItem
+                            title={todo.title}
+                            status={todo.status == 'pending' ? false : true}
+                            id={todo._id}
+                            key={todo._id}
+                        />
                     ))}
                 </div>
             </div>
