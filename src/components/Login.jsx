@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Serverport from "./Serverport";
 
 export default function Login() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const navigate = useNavigate();
 
     const handleSubmit = async () => {
         try {
@@ -18,9 +20,11 @@ export default function Login() {
             console.log(response.data);
             if (response.status === 200) {
                 localStorage.clear();
-                localStorage.setItem('user', response.data.token);
+                console.log(response.data);
+                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('user', response.data.user.username);
                 localStorage.setItem('user_id', response.data.user.uniqueId);
-                window.location.href = '/main';
+                navigate('/dashboard');
             }
 
         } catch (error) {

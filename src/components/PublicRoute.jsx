@@ -9,7 +9,7 @@ const PublicRoute = () => {
     }, []);
 
     function checkLogin() {
-        if (localStorage.getItem('user')) {
+        if (localStorage.getItem('token')) {
             // window.location.href = '/dashboard';
         } else {
             localStorage.clear();

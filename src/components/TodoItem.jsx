@@ -24,7 +24,7 @@ export default function TodoItem({ title, status, id }) {
     }
 
     return (
-        <div className="w-full h-12 flex pl-5 cursor-pointer text-white bg-slate-700 font-semibold text-lg items-center justify-start gap-3 hover:bg-slate-800 rounded-3xl relative">
+        <div className="w-full h-12 flex pl-5 cursor-pointer text-white bg-primary font-semibold text-lg items-center justify-start gap-3 hover:bg-slate-800 rounded-3xl relative">
             <input
                 type="checkbox"
                 checked={status}

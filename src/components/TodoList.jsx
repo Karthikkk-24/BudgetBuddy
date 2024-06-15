@@ -49,7 +49,7 @@ export default function TodoList() {
                         onChange={(e) => setTodoTitle(e.target.value)}
                         placeholder="Add new task"
                     />
-                    <button onClick={handleSubmit} className="w-12 h-12 bg-primary text-white flex items-center justify-center font-semibold rounded-full">
+                    <button onClick={handleSubmit} className="w-12 h-12 bg-primary hover:scale-110 transition-all text-white flex items-center justify-center font-semibold rounded-full">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
