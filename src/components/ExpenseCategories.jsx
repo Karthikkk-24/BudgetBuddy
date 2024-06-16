@@ -15,7 +15,7 @@ export default function ExpenseCategories() {
     const getExpenseCategories = async () => {
         try {
             const response = await axios.post(
-                `${Serverport()}/api/users/getExpenseCategories`,
+                `${Serverport()}/api/finance/getExpenseCategories`,
                 {
                     user,
                 }
@@ -25,7 +25,8 @@ export default function ExpenseCategories() {
 
             if (response.status === 200) {
                 console.log(response.data);
-                setExpenseCategories(response.data.expense);
+                setExpenseCategoryName('');
+                setExpenseCategories(response.data.expenseCategories);
             }
         } catch (error) {
             console.log(error);
@@ -39,7 +40,7 @@ export default function ExpenseCategories() {
             }
 
             const response = await axios.post(
-                `${Serverport()}/api/users/addExpenseCategory`,
+                `${Serverport()}/api/finance/addExpenseCategory`,
                 {
                     user,
                     expenseCategoryName,
@@ -48,12 +49,11 @@ export default function ExpenseCategories() {
 
             console.log(response.data);
 
-            if (response.status === 200) {
+            if (response.status === 201) {
                 console.log(response.data);
                 setExpenseCategoryName('');
                 getExpenseCategories();
             }
-
         } catch (error) {
             console.log(error);
         }
@@ -79,9 +79,7 @@ export default function ExpenseCategories() {
             </div>
             <button
                 type="submit"
-                onClick={() => {
-                    handleSubmit();
-                }}
+                onClick={handleSubmit}
                 className="bg-primary h-auto w-auto py-3 px-5 font-semibold text-sm rounded-lg text-white hover:scale-110 transition-all"
             >
                 Submit
@@ -94,6 +92,45 @@ export default function ExpenseCategories() {
                         <th className="py-3">Actions</th>
                     </tr>
                 </thead>
+                <tbody>
+                    {expenseCategories.map((expenseCategory, index) => (
+                        <tr key={expenseCategory._id}>
+                            <td className="text-center py-3">{index + 1}</td>
+                            <td className="text-center py-3">
+                                {expenseCategory.title}
+                            </td>
+                            <td className="text-center py-3">
+                                <button
+                                    type="submit"
+                                    className="bg-red-500 h-auto w-auto py-3 px-5 font-semibold text-sm rounded-lg text-white hover:scale-110 transition-all"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        className="icon icon-tabler icons-tabler-outline icon-tabler-trash-x"
+                                    >
+                                        <path
+                                            stroke="none"
+                                            d="M0 0h24v24H0z"
+                                            fill="none"
+                                        />
+                                        <path d="M4 7h16" />
+                                        <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                        <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                        <path d="M10 12l4 4m0 -4l-4 4" />
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
             </table>
         </>
     );
