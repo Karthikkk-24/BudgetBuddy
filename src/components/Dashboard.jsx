@@ -57,20 +57,20 @@ export default function Dashboard() {
         <div className="flex w-full h-full items-start justify-start bg-background p-5">
             <div className="w-full h-auto flex items-center justify-center gap-6">
                 <div className="shadow-xl w-1/4 flex flex-col gap-3 items-center justify-center rounded-xl h-52">
-                    <h2 className="font-bold text-3xl text-center">{pendingTask}</h2>
-                    <p className="text-lg font-semibold">Pending Tasks</p>
+                    <h2 className="font-bold text-primary text-3xl text-center">{pendingTask}</h2>
+                    <p className="text-lg text-primary font-semibold">Pending Tasks</p>
                 </div>
                 <div className="shadow-xl w-1/4 flex flex-col gap-3 items-center justify-center rounded-xl h-52">
-                    <h2 className="font-bold text-3xl text-center">{completedTask}</h2>
-                    <p className="text-lg font-semibold">Completed Tasks</p>
+                    <h2 className="font-bold text-primary text-3xl text-center">{completedTask}</h2>
+                    <p className="text-lg text-primary font-semibold">Completed Tasks</p>
                 </div>
                 <div className="shadow-xl w-1/4 flex flex-col gap-3 items-center justify-center rounded-xl h-52">
-                    <h2 className="font-bold text-3xl text-center">Heading</h2>
-                    <p className="text-lg font-semibold">Total Expense</p>
+                    <h2 className="font-bold text-primary text-3xl text-center">Heading</h2>
+                    <p className="text-lg text-primary font-semibold">Total Expense</p>
                 </div>
                 <div className="shadow-xl w-1/4 flex flex-col gap-3 items-center justify-center rounded-xl h-52">
-                    <h2 className="font-bold text-3xl text-center">Heading</h2>
-                    <p className="text-lg font-semibold">Balance Amount</p>
+                    <h2 className="font-bold text-primary text-3xl text-center">Heading</h2>
+                    <p className="text-lg text-primary font-semibold">Balance Amount</p>
                 </div>
             </div>
         </div>

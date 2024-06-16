@@ -61,11 +61,11 @@ export default function IncomeCategories() {
 
     return (
         <>
-            <h3 className="text-2xl font-semibold">Income Categories</h3>
+            <h3 className="text-2xl font-semibold text-primary">Income Categories</h3>
             <div className="flex flex-col items-start justify-start gap-2 w-full h-auto">
                 <label
                     htmlFor="income"
-                    className="font-semibold text-sm text-left"
+                    className="font-semibold text-primary text-sm text-left"
                 >
                     Income Category Name
                 </label>
