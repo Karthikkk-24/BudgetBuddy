@@ -8,10 +8,6 @@ const AuthTokenSchema = new mongoose.Schema({
     user: {
         type: String
     },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    }
-});
+}, { timestamps: true });
 
 export default mongoose.model('AuthTokenCollection', AuthTokenSchema);

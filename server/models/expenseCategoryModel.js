@@ -9,11 +9,7 @@ const expenseSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
-});
+}, { timestamps: true });
 
 const ExpenseCategoryModel = mongoose.model('expenseCategory', expenseSchema);
 

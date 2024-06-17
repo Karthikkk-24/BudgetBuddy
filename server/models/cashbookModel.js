@@ -24,11 +24,7 @@ const cashbookSchema = new mongoose.Schema({
     date: {
         type: String,
     },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
-});
+}, { timestamps: true });
 
 const CashbookModel = mongoose.model('cashbook', cashbookSchema);
 

@@ -93,7 +93,7 @@ cashRouter.post('/addIncome', async (req, res) => {
             title: incomeName,
             category: incomeCategory,
             amount,
-            date: incomeDate
+            date: incomeDate,
         });
 
         res.status(201).json({ income });
