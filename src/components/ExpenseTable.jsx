@@ -2,19 +2,19 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Serverport from './Serverport';
 
-export default function IncomeTable() {
-    const [incomeData, setIncomeData] = useState([]);
+export default function ExpenseTable() {
+    const [expenseData, setExpenseData] = useState([]);
 
     useEffect(() => {
-        getAllIncome();
+        getAllExpenses();
     }, []);
 
     const user = localStorage.getItem('user_id');
 
-    const getAllIncome = async () => {
+    const getAllExpenses = async () => {
         try {
             const response = await axios.post(
-                `${Serverport()}/api/finance/getAllIncome`,
+                `${Serverport()}/api/finance/getAllExpense`,
                 {
                     user,
                 }
@@ -23,8 +23,8 @@ export default function IncomeTable() {
             console.log(response.data);
 
             if (response.status === 200) {
-                console.log(response.data.getIncome);
-                setIncomeData(response.data.getIncome);
+                console.log(response.data.getExpense);
+                setExpenseData(response.data.getExpense);
             }
         } catch (error) {
             console.log(error);
@@ -45,7 +45,7 @@ export default function IncomeTable() {
                     </tr>
                 </thead>
                 <tbody>
-                    {incomeData.map((income, index) => {
+                    {expenseData.map((income, index) => {
                         return (
                             <tr key={index}>
                                 <td className="py-3 text-center">

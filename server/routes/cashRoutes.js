@@ -165,6 +165,33 @@ cashRouter.post('/getAllIncome', async (req, res) => {
     }
 });
 
+cashRouter.post('/getAllExpense', async (req, res) => {
+    try {
+        const { user } = req.body;
+
+        const expenses = await ExpenseModel.find({ username: user });
+
+        const getExpense = expenses.map(async (expense) => {
+
+            const findCategoryName = await ExpenseCategoryModel.find({ _id: expense.category });
+
+            return {
+                id: expense._id,
+                title: expense.title,
+                category: findCategoryName[0].title,
+                amount: expense.amount,
+                date: expense.date
+            }
+        });
+
+        res.status(200).json({ getExpense: await Promise.all(getExpense) });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error.message });
+    }
+});
+
 
 
 export default cashRouter;

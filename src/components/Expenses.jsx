@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import ExpenseTable from './ExpenseTable';
 import Serverport from './Serverport';
 
 export default function Expenses() {
@@ -136,6 +137,7 @@ export default function Expenses() {
                     Submit
                 </button>
             </div>
+            <ExpenseTable />
         </div>
     );
 }
