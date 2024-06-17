@@ -1,8 +1,97 @@
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import Serverport from './Serverport';
+
 export default function Expenses() {
+    const [expenseCategories, setExpenseCategories] = useState([]);
+    const [amount, setAmount] = useState(0);
+    const [expenseName, setExpenseName] = useState('');
+    const [expenseDate, setExpenseDate] = useState('');
+    const [expenseCategory, setExpenseCategory] = useState('');
+
+    useEffect(() => {
+        getExpenseCategories();
+    }, []);
+
+    const user = localStorage.getItem('user_id');
+
+    const getExpenseCategories = async () => {
+        try {
+            const response = await axios.post(
+                `${Serverport()}/api/finance/getExpenseCategories`,
+                {
+                    user,
+                }
+            );
+
+            console.log(response.data);
+
+            if (response.status === 200) {
+                console.log(response.data);
+                console.log('expenseCategory', response.data.expenseCategories);
+                setExpenseCategories(response.data.expenseCategories);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleExpenseSubmit = async () => {
+        try {
+            const response = await axios.post(
+                `${Serverport()}/api/finance/addExpense`,
+                {
+                    user,
+                    expenseName,
+                    expenseCategory,
+                    amount,
+                    expenseDate,
+                }
+            );
+
+            console.log(response.data);
+
+            if (response.status === 201) {
+                console.log(response.data);
+                setAmount(0);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <div className="flex w-full h-full items-start justify-start gap-10 bg-background px-4 py-6 flex-col">
-            <h1 className="text-5xl">Expenses</h1>
+            <h1 className="text-5xl">Expense</h1>
             <div className="flex flex-col items-start justify-start w-full h-auto gap-4">
+                <div className="flex items-center justify-center w-full h-auto gap-6">
+                    <div className="w-1/2 flex flex-col items-start justify-start gap-2">
+                        <label className="font-semibold text-sm">
+                            Expense Name
+                        </label>
+                        <input
+                            type="text"
+                            name="name"
+                            value={expenseName}
+                            onChange={(e) => setExpenseName(e.target.value)}
+                            id="name"
+                            className="w-full h-12 border-2 border-slate-100 rounded-lg p-2"
+                            required
+                        />
+                    </div>
+                    <div className="w-1/2 flex flex-col items-start justify-start gap-2">
+                        <label className="font-semibold text-sm">Date</label>
+                        <input
+                            type="date"
+                            name="name"
+                            value={expenseDate}
+                            onChange={(e) => setExpenseDate(e.target.value)}
+                            id="name"
+                            className="w-full h-12 border-2 border-slate-100 rounded-lg p-2"
+                            required
+                        />
+                    </div>
+                </div>
                 <div className="flex items-center justify-center w-full h-auto gap-6">
                     <div className="w-1/2 flex flex-col items-start justify-start gap-2">
                         <label className="font-semibold text-sm">
@@ -13,8 +102,15 @@ export default function Expenses() {
                             id="category"
                             className="w-full h-12 border-2 border-slate-100 rounded-lg p-2"
                             required
+                            value={expenseCategory}
+                            onChange={(e) => setExpenseCategory(e.target.value)}
                         >
                             <option value="">Select Expense Category</option>
+                            {expenseCategories.map((category) => (
+                                <option key={category._id} value={category._id}>
+                                    {category.title}
+                                </option>
+                            ))}
                         </select>
                     </div>
                     <div className="w-1/2 flex flex-col items-start justify-start gap-2">
@@ -25,12 +121,18 @@ export default function Expenses() {
                             type="number"
                             name="amount"
                             id="amount"
+                            value={amount}
+                            onChange={(e) => setAmount(e.target.value)}
                             className="w-full h-12 border-2 border-slate-100 rounded-lg p-2"
                             required
                         />
                     </div>
                 </div>
-                <button className="w-auto h-auto hover:scale-110 transition-all bg-primary rounded-lg text-white px-5 py-3 flex items-center justify-center gap-1">
+                <button
+                    onClick={handleExpenseSubmit}
+                    type="submit"
+                    className="w-auto h-auto hover:scale-110 transition-all bg-primary rounded-lg text-white px-5 py-3 flex items-center justify-center gap-1"
+                >
                     Submit
                 </button>
             </div>
