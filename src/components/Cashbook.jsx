@@ -1,4 +1,36 @@
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import Serverport from './Serverport';
+
 export default function Cashbook() {
+    const [cashbookEntries, setCashbookEntries] = useState([]);
+
+    useEffect(() => {
+        fetchCashbookEntries();
+    }, []);
+
+    const user = localStorage.getItem('user_id');
+
+    const fetchCashbookEntries = async () => {
+        try {
+            const response = await axios.post(
+                `${Serverport()}/api/finance/getCashbookEntries`,
+                {
+                    user,
+                }
+            );
+
+            console.log(response.data);
+
+            if (response.status === 200) {
+                console.log(response.data);
+                setCashbookEntries(response.data.cashbookEntries);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <div className="flex w-full h-full flex-col items-start justify-start gap-5 bg-background px-4 py-6">
             <h1 className="text-5xl">Cashbook</h1>
@@ -6,16 +38,42 @@ export default function Cashbook() {
                 <table className="border-2 border-slate-100 w-full">
                     <thead>
                         <tr>
-                            <th className="border-2 py-3 border-slate-100">Date</th>
                             <th className="border-2 py-3 border-slate-100">
-                                Description
+                                Date
                             </th>
-                            <th className="border-2 py-3 border-slate-100">Debit</th>
+                            <th className="border-2 py-3 border-slate-100">
+                                Title
+                            </th>
+                            <th className="border-2 py-3 border-slate-100">
+                                Debit
+                            </th>
                             <th className="border-2 py-3 border-slate-100">
                                 Credit
                             </th>
                         </tr>
                     </thead>
+                    <tbody>
+                        {cashbookEntries.map((entry) => (
+                            <tr key={entry._id}>
+                                <td className="text-center border-2 py-3 border-slate-100">
+                                    {entry.date}
+                                </td>
+                                <td className="text-center border-2 py-3 border-slate-100">
+                                    {entry.title}
+                                </td>
+                                <td className="text-center border-2 py-3 border-slate-100">
+                                    {entry.heading === 'Expense'
+                                        ? entry.amount
+                                        : 0}
+                                </td>
+                                <td className="text-center border-2 py-3 border-slate-100">
+                                    {entry.heading === 'Income'
+                                        ? entry.amount
+                                        : 0}
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
                 </table>
             </div>
         </div>

@@ -192,6 +192,19 @@ cashRouter.post('/getAllExpense', async (req, res) => {
     }
 });
 
+cashRouter.post('/getCashbookEntries', async (req, res) => {
+    try {
+        const { user } = req.body;
+
+        const cashbookEntries = await CashbookModel.find({ username: user });
+
+        res.status(200).json({ cashbookEntries });
+
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 
 
 export default cashRouter;
