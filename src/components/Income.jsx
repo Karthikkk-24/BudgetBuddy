@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import IncomeTable from './IncomeTable';
 import Serverport from './Serverport';
 
 export default function Income() {
@@ -136,6 +137,7 @@ export default function Income() {
                     Submit
                 </button>
             </div>
+            <IncomeTable />
         </div>
     );
 }

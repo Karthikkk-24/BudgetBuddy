@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const expenseSchema = new mongoose.Schema({
+const incomeSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
@@ -11,6 +11,6 @@ const expenseSchema = new mongoose.Schema({
     },
 }, { timestamps: true });
 
-const IncomeCategoryModel = mongoose.model('incomeCategory', expenseSchema);
+const IncomeCategoryModel = mongoose.model('incomeCategory', incomeSchema);
 
 export default IncomeCategoryModel;

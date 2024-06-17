@@ -80,8 +80,6 @@ cashRouter.post('/getIncomeCategories', async (req, res) => {
         console.log(error);
         res.status(500).json({ message: error.message });
     }
-
-
 });
 
 cashRouter.post('/addIncome', async (req, res) => {
@@ -137,6 +135,33 @@ cashRouter.post('/addExpense', async (req, res) => {
 
     } catch (error) {
         console.log(error);
+    }
+});
+
+cashRouter.post('/getAllIncome', async (req, res) => {
+    try {
+        const { user } = req.body;
+
+        const incomes = await IncomeModel.find({ username: user });
+
+        const getIncome = incomes.map(async (income) => {
+
+            const findCategoryName = await IncomeCategoryModel.find({ _id: income.category });
+
+            return {
+                id: income._id,
+                title: income.title,
+                category: findCategoryName[0].title,
+                amount: income.amount,
+                date: income.date
+            }
+        });
+
+        res.status(200).json({ getIncome: await Promise.all(getIncome) });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error.message });
     }
 });
 
