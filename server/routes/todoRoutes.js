@@ -80,7 +80,6 @@ todoRouter.post('/getTodayTasks', async (req, res) => {
 
         const getTodo = await TodoModel.find({
             username: user,
-            date: getFormattedDate(),
             status: 'pending'
         });
 
@@ -100,7 +99,6 @@ todoRouter.post('/getTodayCompletedTasks', async (req, res) => {
 
         const getTodo = await TodoModel.find({
             username: user,
-            date: getFormattedDate(),
             status: 'completed'
         });
 

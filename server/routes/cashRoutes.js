@@ -84,6 +84,25 @@ cashRouter.post('/getIncomeCategories', async (req, res) => {
 
 });
 
+cashRouter.post('/addIncome', async (req, res) => {
+    try {
+        const { user, incomeName, incomeCategory, amount, incomeDate } = req.body;
+
+        const income = await IncomeModel.create({
+            username: user,
+            title: incomeName,
+            category: incomeCategory,
+            amount,
+            date: incomeDate
+        });
+
+        res.status(201).json({ income });
+
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 
 
 export default cashRouter;
