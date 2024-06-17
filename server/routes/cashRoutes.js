@@ -96,6 +96,15 @@ cashRouter.post('/addIncome', async (req, res) => {
             date: incomeDate,
         });
 
+        const addEntryToCashbook = await CashbookModel.create({
+            username: user,
+            title: incomeName,
+            category: incomeCategory,
+            heading: 'Income',
+            amount,
+            date: incomeDate
+        });
+
         res.status(201).json({ income });
 
     } catch (error) {
@@ -111,6 +120,15 @@ cashRouter.post('/addExpense', async (req, res) => {
             username: user,
             title: expenseName,
             category: expenseCategory,
+            amount,
+            date: expenseDate
+        });
+
+        const addEntryToCashbook = await CashbookModel.create({
+            username: user,
+            title: expenseName,
+            category: expenseCategory,
+            heading: 'Expense',
             amount,
             date: expenseDate
         });
