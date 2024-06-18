@@ -9,6 +9,7 @@ export default function Expenses() {
     const [expenseName, setExpenseName] = useState('');
     const [expenseDate, setExpenseDate] = useState('');
     const [expenseCategory, setExpenseCategory] = useState('');
+    const [refresh, setRefresh] = useState(false);
 
     useEffect(() => {
         getExpenseCategories();
@@ -55,6 +56,11 @@ export default function Expenses() {
             if (response.status === 201) {
                 console.log(response.data);
                 setAmount(0);
+                setExpenseName('');
+                setExpenseDate('');
+                setExpenseCategory('');
+                getExpenseCategories();
+                setRefresh(!refresh);
             }
         } catch (error) {
             console.log(error);
@@ -137,7 +143,7 @@ export default function Expenses() {
                     Submit
                 </button>
             </div>
-            <ExpenseTable />
+            <ExpenseTable refresh={refresh} />
         </div>
     );
 }

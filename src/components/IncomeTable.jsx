@@ -1,13 +1,15 @@
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import Serverport from './Serverport';
 
-export default function IncomeTable() {
+
+export default function IncomeTable({ refresh }) {
     const [incomeData, setIncomeData] = useState([]);
 
     useEffect(() => {
         getAllIncome();
-    }, []);
+    }, [refresh]);
 
     const user = localStorage.getItem('user_id');
 
@@ -124,3 +126,7 @@ export default function IncomeTable() {
         </div>
     );
 }
+
+IncomeTable.propTypes = {
+    refresh: PropTypes.bool,
+};

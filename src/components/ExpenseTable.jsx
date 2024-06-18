@@ -1,13 +1,15 @@
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import Serverport from './Serverport';
 
-export default function ExpenseTable() {
+
+export default function ExpenseTable({ refresh }) {
     const [expenseData, setExpenseData] = useState([]);
 
     useEffect(() => {
         getAllExpenses();
-    }, []);
+    }, [refresh]);
 
     const user = localStorage.getItem('user_id');
 
@@ -124,3 +126,7 @@ export default function ExpenseTable() {
         </div>
     );
 }
+
+ExpenseTable.propTypes = {
+    refresh: PropTypes.bool,
+};

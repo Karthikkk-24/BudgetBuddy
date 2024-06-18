@@ -9,6 +9,7 @@ export default function Income() {
     const [incomeName, setIncomeName] = useState('');
     const [incomeDate, setIncomeDate] = useState('');
     const [incomeCategory, setIncomeCategory] = useState('');
+    const [refresh, setRefresh] = useState(false);
 
     useEffect(() => {
         getIncomeCategories();
@@ -60,6 +61,7 @@ export default function Income() {
                 setIncomeDate('');
                 setIncomeCategory('');
                 getIncomeCategories();
+                setRefresh(!refresh);
             }
         } catch (error) {
             console.log(error);
@@ -142,7 +144,7 @@ export default function Income() {
                     Submit
                 </button>
             </div>
-            <IncomeTable />
+            <IncomeTable refresh={refresh} />
         </div>
     );
 }
