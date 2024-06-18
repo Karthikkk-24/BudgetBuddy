@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import DashboardSmallBox from './DashboardSmallBox';
 import Serverport from './Serverport';
 
 export default function Dashboard() {
@@ -112,38 +113,13 @@ export default function Dashboard() {
     return (
         <div className="flex w-full h-full items-start justify-start bg-background p-5">
             <div className="w-full h-auto flex items-center justify-center gap-6">
-                <div className="shadow-xl w-1/4 flex flex-col gap-3 items-center justify-center rounded-xl h-52">
-                    <h2 className="font-bold text-primary text-3xl text-center">
-                        {pendingTask}
-                    </h2>
-                    <p className="text-lg text-primary font-semibold">
-                        Pending Tasks
-                    </p>
-                </div>
-                <div className="shadow-xl w-1/4 flex flex-col gap-3 items-center justify-center rounded-xl h-52">
-                    <h2 className="font-bold text-primary text-3xl text-center">
-                        {completedTask}
-                    </h2>
-                    <p className="text-lg text-primary font-semibold">
-                        Completed Tasks
-                    </p>
-                </div>
-                <div className="shadow-xl w-1/4 flex flex-col gap-3 items-center justify-center rounded-xl h-52">
-                    <h2 className="font-bold text-primary text-3xl text-center">
-                        {totalExpenses}
-                    </h2>
-                    <p className="text-lg text-primary font-semibold">
-                        Total Expense
-                    </p>
-                </div>
-                <div className="shadow-xl w-1/4 flex flex-col gap-3 items-center justify-center rounded-xl h-52">
-                    <h2 className="font-bold text-primary text-3xl text-center">
-                        {totalIncome}
-                    </h2>
-                    <p className="text-lg text-primary font-semibold">
-                        Total Income
-                    </p>
-                </div>
+                <DashboardSmallBox data={pendingTask} name="Pending Tasks" />
+                <DashboardSmallBox
+                    data={completedTask}
+                    name="Completed Tasks"
+                />
+                <DashboardSmallBox data={totalExpenses} name="Total Expenses" />
+                <DashboardSmallBox data={totalIncome} name="Total Income" />
             </div>
         </div>
     );
