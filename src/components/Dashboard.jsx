@@ -5,10 +5,14 @@ import Serverport from './Serverport';
 export default function Dashboard() {
     const [pendingTask, setPendingTask] = useState([]);
     const [completedTask, setCompletedTask] = useState([]);
+    const [totalExpenses, setTotalExpenses] = useState([]);
+    const [totalIncome, setTotalIncome] = useState([]);
 
     useEffect(() => {
         getTodayTasks();
         getCompletedTasks();
+        getTotalExpenses();
+        getTotalIncome();
     }, []);
 
     const user = localStorage.getItem('user_id');
@@ -53,24 +57,92 @@ export default function Dashboard() {
         }
     };
 
+    const getTotalExpenses = async () => {
+        try {
+            const response = await axios.post(
+                `${Serverport()}/api/finance/getTotalExpenses`,
+                {
+                    user,
+                }
+            );
+
+            console.log(response.data);
+
+            if (response.status === 200) {
+                if (response.data.totalExpenses.length > 0) {
+                    // console.log(
+                    //     'totalExpenses',
+                    //     response.data.totalExpenses[0].total
+                    // );
+                    setTotalExpenses(response.data.totalExpenses[0].total);
+                } else {
+                    setTotalExpenses(0);
+                }
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const getTotalIncome = async () => {
+        try {
+            const response = await axios.post(
+                `${Serverport()}/api/finance/getTotalIncome`,
+                {
+                    user,
+                }
+            );
+
+            console.log(response.data);
+
+            if (response.status === 200) {
+                // console.log(response.data);
+                // console.log('totalIncome', response.data.totalIncome[0].total);
+                if (response.data.totalIncome.length > 0) {
+                    setTotalIncome(response.data.totalIncome[0].total);
+                } else {
+                    setTotalIncome(0);
+                }
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <div className="flex w-full h-full items-start justify-start bg-background p-5">
             <div className="w-full h-auto flex items-center justify-center gap-6">
                 <div className="shadow-xl w-1/4 flex flex-col gap-3 items-center justify-center rounded-xl h-52">
-                    <h2 className="font-bold text-primary text-3xl text-center">{pendingTask}</h2>
-                    <p className="text-lg text-primary font-semibold">Pending Tasks</p>
+                    <h2 className="font-bold text-primary text-3xl text-center">
+                        {pendingTask}
+                    </h2>
+                    <p className="text-lg text-primary font-semibold">
+                        Pending Tasks
+                    </p>
                 </div>
                 <div className="shadow-xl w-1/4 flex flex-col gap-3 items-center justify-center rounded-xl h-52">
-                    <h2 className="font-bold text-primary text-3xl text-center">{completedTask}</h2>
-                    <p className="text-lg text-primary font-semibold">Completed Tasks</p>
+                    <h2 className="font-bold text-primary text-3xl text-center">
+                        {completedTask}
+                    </h2>
+                    <p className="text-lg text-primary font-semibold">
+                        Completed Tasks
+                    </p>
                 </div>
                 <div className="shadow-xl w-1/4 flex flex-col gap-3 items-center justify-center rounded-xl h-52">
-                    <h2 className="font-bold text-primary text-3xl text-center">Heading</h2>
-                    <p className="text-lg text-primary font-semibold">Total Expense</p>
+                    <h2 className="font-bold text-primary text-3xl text-center">
+                        {totalExpenses}
+                    </h2>
+                    <p className="text-lg text-primary font-semibold">
+                        Total Expense
+                    </p>
                 </div>
                 <div className="shadow-xl w-1/4 flex flex-col gap-3 items-center justify-center rounded-xl h-52">
-                    <h2 className="font-bold text-primary text-3xl text-center">Heading</h2>
-                    <p className="text-lg text-primary font-semibold">Balance Amount</p>
+                    <h2 className="font-bold text-primary text-3xl text-center">
+                        {totalIncome}
+                    </h2>
+                    <p className="text-lg text-primary font-semibold">
+                        Total Income
+                    </p>
                 </div>
             </div>
         </div>

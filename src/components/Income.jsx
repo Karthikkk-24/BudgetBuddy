@@ -31,6 +31,7 @@ export default function Income() {
                 console.log(response.data);
                 console.log('incomeCategory', response.data.incomeCategories);
                 setIncomeCategories(response.data.incomeCategories);
+
             }
         } catch (error) {
             console.log(error);
@@ -55,6 +56,10 @@ export default function Income() {
             if (response.status === 201) {
                 console.log(response.data);
                 setAmount(0);
+                setIncomeName('');
+                setIncomeDate('');
+                setIncomeCategory('');
+                getIncomeCategories();
             }
         } catch (error) {
             console.log(error);

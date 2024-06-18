@@ -31,6 +31,11 @@ export default function Cashbook() {
         }
     };
 
+    const formatDate = (param) => {
+        const arr = param.split('-');
+        return arr[2] + ' / ' + arr[1] + ' / ' + arr[0];
+    }
+
     return (
         <div className="flex w-full h-full flex-col items-start justify-start gap-5 bg-background px-4 py-6">
             <h1 className="text-5xl">Cashbook</h1>
@@ -56,7 +61,7 @@ export default function Cashbook() {
                         {cashbookEntries.map((entry) => (
                             <tr key={entry._id}>
                                 <td className="text-center border-2 py-3 border-slate-100">
-                                    {entry.date}
+                                    {formatDate(entry.date)}
                                 </td>
                                 <td className="text-center border-2 py-3 border-slate-100">
                                     {entry.title}

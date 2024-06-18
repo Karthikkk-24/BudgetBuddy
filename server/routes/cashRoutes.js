@@ -205,6 +205,38 @@ cashRouter.post('/getCashbookEntries', async (req, res) => {
     }
 });
 
+cashRouter.post('/getTotalIncome', async (req, res) => {
+    try {
+        const { user } = req.body;
+
+        const totalIncome = await CashbookModel.aggregate([
+            { $match: { username: user, heading: 'Income' } },
+            { $group: { _id: null, total: { $sum: '$amount' } } }
+        ]);
+        
+        res.status(200).json({ totalIncome });
+
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+cashRouter.post('/getTotalExpenses', async (req, res) => {
+    try {
+        const { user } = req.body;
+
+        const totalExpenses = await CashbookModel.aggregate([
+            { $match: { username: user, heading: 'Expense' } },
+            { $group: { _id: null, total: { $sum: '$amount' } } }
+        ]);
+        
+        res.status(200).json({ totalExpenses });
+
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 
 
 export default cashRouter;
