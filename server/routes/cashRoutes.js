@@ -103,6 +103,8 @@ cashRouter.post('/addIncome', async (req, res) => {
             date: incomeDate
         });
 
+        console.log('addEntryToCashbook', addEntryToCashbook);
+
         res.status(201).json({ income });
 
     } catch (error) {
@@ -130,6 +132,8 @@ cashRouter.post('/addExpense', async (req, res) => {
             amount,
             date: expenseDate
         });
+
+        console.log('addEntryToCashbook', addEntryToCashbook);
 
         res.status(201).json({ expense });
 
@@ -234,6 +238,64 @@ cashRouter.post('/getTotalExpenses', async (req, res) => {
 
     } catch (error) {
         console.log(error);
+    }
+});
+
+cashRouter.post('/getIncomeData', async (req, res) => {
+    try {
+        const { user } = req.body;
+
+        const incomeData = await IncomeModel.aggregate([
+            { $match: { username: user } },
+            {
+                $group: {
+                    _id: '$date',
+                    totalAmount: { $sum: '$amount' }
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    date: '$_id',
+                    amount: '$totalAmount'
+                }
+            },
+            { $sort: { date: 1 } }
+        ]);
+
+        res.status(200).json({ incomeData });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: error.message });
+    }
+});
+
+cashRouter.post('/getExpenseData', async (req, res) => {
+    try {
+        const { user } = req.body;
+
+        const expenseData = await ExpenseModel.aggregate([
+            { $match: { username: user } },
+            {
+                $group: {
+                    _id: '$date',
+                    totalAmount: { $sum: '$amount' }
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    date: '$_id',
+                    amount: '$totalAmount'
+                }
+            },
+            { $sort: { date: 1 } }
+        ]);
+
+        res.status(200).json({ expenseData });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: error.message });
     }
 });
 
