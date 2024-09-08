@@ -19,6 +19,7 @@ export default function Sidebar() {
                 <SidebarItem title="Cashbook" icon="📕" route={'/cashbook'} />
                 <SidebarItem title="Todolist" icon="📝" route={'/todo-list'} />
                 <SidebarItem title="Completed" icon="✅" route={'/completed'} />
+                <SidebarItem title="EMI Tracker" icon="✅" route={'/emi-tracker'} />
             </div>
         </div>
     );
