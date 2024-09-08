@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import IncomeTable from './IncomeTable';
-import Serverport from './Serverport';
+import IncomeTable from '../components/IncomeTable';
+import Serverport from '../components/Serverport';
 
 export default function Income() {
     const [incomeCategories, setIncomeCategories] = useState([]);

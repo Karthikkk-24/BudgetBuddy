@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Serverport from './Serverport';
-import TodoItem from './TodoItem';
+import Serverport from '../components/Serverport';
+import TodoItem from '../components/TodoItem';
 
 export default function TodoList() {
     const [todoTitle, setTodoTitle] = useState('');

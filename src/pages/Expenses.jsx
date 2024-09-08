@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import ExpenseTable from './ExpenseTable';
-import Serverport from './Serverport';
+import ExpenseTable from '../components/ExpenseTable';
+import Serverport from '../components/Serverport';
 
 export default function Expenses() {
     const [expenseCategories, setExpenseCategories] = useState([]);

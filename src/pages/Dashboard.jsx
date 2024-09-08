@@ -2,8 +2,8 @@ import axios from 'axios';
 import 'chart.js/auto';
 import { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
-import DashboardSmallBox from './DashboardSmallBox';
-import Serverport from './Serverport';
+import DashboardSmallBox from '../components/DashboardSmallBox';
+import Serverport from '../components/Serverport';
 
 export default function Dashboard() {
     const [pendingTask, setPendingTask] = useState(0);

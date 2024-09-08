@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Serverport from './Serverport';
+import Serverport from '../components/Serverport';
 
 export default function ExpenseCategories() {
     const [expenseCategoryName, setExpenseCategoryName] = useState('');

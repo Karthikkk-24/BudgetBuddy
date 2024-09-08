@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Serverport from './Serverport';
+import Serverport from '../components/Serverport';
 
 export default function Cashbook() {
     const [cashbookEntries, setCashbookEntries] = useState([]);
