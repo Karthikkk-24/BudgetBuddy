@@ -1,16 +1,16 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
-import Cashbook from './components/Cashbook';
-import Categories from './components/Categories';
-import Completed from './components/Completed';
-import Dashboard from './components/Dashboard';
-import Expenses from './components/Expenses';
-import Income from './components/Income';
-import Login from './components/Login';
-import Main from './components/Main';
 import PublicRoute from './components/PublicRoute';
-import Register from './components/Register';
-import TodoList from './components/TodoList';
+import Cashbook from './pages/Cashbook';
+import Categories from './pages/Categories';
+import Completed from './pages/Completed';
+import Dashboard from './pages/Dashboard';
+import Expenses from './pages/Expenses';
+import Income from './pages/Income';
+import Login from './pages/Login';
+import Main from './pages/Main';
+import Register from './pages/Register';
+import TodoList from './pages/TodoList';
 
 function App() {
     return (
