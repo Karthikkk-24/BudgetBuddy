@@ -5,6 +5,7 @@ import Cashbook from './pages/Cashbook';
 import Categories from './pages/Categories';
 import Completed from './pages/Completed';
 import Dashboard from './pages/Dashboard';
+import EMITracker from './pages/EMITracker';
 import Expenses from './pages/Expenses';
 import Income from './pages/Income';
 import Login from './pages/Login';
@@ -28,6 +29,7 @@ function App() {
                     <Route path='/completed' element={<Completed />} />
                     <Route path='/categories' element={<Categories />} />
                     <Route path='/cashbook' element={<Cashbook />} />
+                    <Route path='/emi-tracker' element={<EMITracker />} />
                 </Route>
             </Routes>
         </Router>
