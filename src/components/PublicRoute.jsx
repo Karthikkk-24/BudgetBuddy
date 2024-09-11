@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
+import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 
 const PublicRoute = () => {
@@ -26,6 +27,7 @@ const PublicRoute = () => {
                     <Sidebar />
                 </div>
                 <div className="w-full h-full flex flex-col items-start justify-start">
+                    <Navbar />
                     <Outlet />
                 </div>
             </div>
