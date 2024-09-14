@@ -25,6 +25,17 @@ export default function EMITracker() {
                         <option value="3y">3 Years</option>
                     </select>
                 </div>
+                <div className="w-1/2 flex flex-col items-start justify-start gap-2">
+                    <label className="font-semibold text-sm">Reminder Duration</label>
+                    <select name="duration" className="w-full h-12 border-2 border-slate-100 rounded-lg p-2" id="duration">
+                        <option value="">Select Reminder Duration</option>
+                        <option value="1d">1 Day</option>
+                        <option value="3d">3 Days</option>
+                        <option value="5d">5 Days</option>
+                        <option value="7d">7 Days</option>
+                        <option value="1w">1 Week</option>
+                    </select>
+                </div>
             </div>
         </div>
     );
