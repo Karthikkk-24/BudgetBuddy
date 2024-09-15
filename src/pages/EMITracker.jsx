@@ -17,6 +17,9 @@ export default function EMITracker() {
 
         if (response.status === 200) {
             console.log(response.data);
+            setDate('');
+            setDuration('');
+            setReminder('');
         } else {
             console.log(response.data);
         }
