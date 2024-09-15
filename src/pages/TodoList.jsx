@@ -72,7 +72,7 @@ export default function TodoList() {
     }, []);
 
     return (
-        <div className="flex flex-col gap-12 w-full h-full items-start justify-start bg-background px-4 py-6">
+        <div className="flex flex-col gap-4 w-full h-full items-start justify-start bg-background px-4 py-6">
             <h1 className="text-3xl font-semibold uppercase">Todolist</h1>
             <div className="w-full h-full items-start justify-start gap-10">
                 <div className="w-full flex items-start justify-start gap-6">

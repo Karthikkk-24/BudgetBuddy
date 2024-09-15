@@ -164,7 +164,7 @@ export default function Dashboard() {
     };
 
     return (
-        <div className="flex flex-col w-full h-full items-start justify-start bg-background p-5">
+        <div className="flex flex-col w-full h-full items-start justify-start bg-background p-5 overflow-y-auto">
             <div className="w-full h-auto flex items-center justify-center gap-6">
                 <DashboardSmallBox data={pendingTask} name="Pending Tasks" />
                 <DashboardSmallBox
