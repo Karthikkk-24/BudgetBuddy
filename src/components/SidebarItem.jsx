@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-export default function SidebarItem({ title, icon, route }) {
+export default function SidebarItem({ title, icon, route, active }) {
     return (
         <Link
             to={route}
-            className="w-full h-12 flex pl-5 cursor-pointer text-white font-semibold text-lg items-center justify-start gap-3 hover:bg-slate-800 rounded-xl"
+            className={`w-full h-12 flex pl-5 cursor-pointer font-semibold text-lg items-center justify-start gap-3 rounded-xl ${
+                active ? 'text-primary bg-white font-semibold rounded-lg' : 'text-white hover:bg-slate-800'
+            }`}
         >
             <span>{icon}</span>
             <span>{title}</span>
@@ -16,5 +18,6 @@ export default function SidebarItem({ title, icon, route }) {
 SidebarItem.propTypes = {
     title: PropTypes.string,
     icon: PropTypes.string,
-    route: PropTypes.string
+    route: PropTypes.string,
+    active: PropTypes.bool,
 };
