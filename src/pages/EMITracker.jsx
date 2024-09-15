@@ -1,4 +1,27 @@
+import axios from 'axios';
+import { useState } from 'react';
+import Serverport from '../components/Serverport';
+
 export default function EMITracker() {
+    const [date, setDate] = useState('');
+    const [duration, setDuration] = useState('');
+    const [reminder, setReminder] = useState('');
+
+    async function handleSubmit(e) {
+        
+        const response = await axios.post(`${Serverport()}/api/setEMI`, {
+            date,
+            duration,
+            reminder
+        });
+
+        if (response.status === 200) {
+            console.log(response.data);
+        } else {
+            console.log(response.data);
+        }
+    }
+
     return (
         <div className="flex w-full h-full items-start justify-start gap-10 bg-background px-4 py-6 flex-col">
             <div className="flex items-center justify-center w-full h-auto gap-6">
@@ -14,7 +37,11 @@ export default function EMITracker() {
                 </div>
                 <div className="w-1/2 flex flex-col items-start justify-start gap-2">
                     <label className="font-semibold text-sm">Duration</label>
-                    <select name="duration" className="w-full h-12 border-2 border-slate-100 rounded-lg p-2" id="duration">
+                    <select
+                        name="duration"
+                        className="w-full h-12 border-2 border-slate-100 rounded-lg p-2"
+                        id="duration"
+                    >
                         <option value="">Select Duration</option>
                         <option value="3m">3 Months</option>
                         <option value="6m">6 Months</option>
@@ -26,8 +53,14 @@ export default function EMITracker() {
                     </select>
                 </div>
                 <div className="w-1/2 flex flex-col items-start justify-start gap-2">
-                    <label className="font-semibold text-sm">Reminder Duration</label>
-                    <select name="duration" className="w-full h-12 border-2 border-slate-100 rounded-lg p-2" id="duration">
+                    <label className="font-semibold text-sm">
+                        Reminder Duration
+                    </label>
+                    <select
+                        name="reminder-duration"
+                        className="w-full h-12 border-2 border-slate-100 rounded-lg p-2"
+                        id="duration"
+                    >
                         <option value="">Select Reminder Duration</option>
                         <option value="1d">1 Day</option>
                         <option value="3d">3 Days</option>
@@ -37,6 +70,13 @@ export default function EMITracker() {
                     </select>
                 </div>
             </div>
+            <button
+                onClick={handleSubmit}
+                type="submit"
+                className="w-auto h-auto hover:scale-110 transition-all bg-primary rounded-lg text-white px-5 py-3 flex items-center justify-center gap-1"
+            >
+                Submit
+            </button>
         </div>
     );
 }
