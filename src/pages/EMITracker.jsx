@@ -7,7 +7,7 @@ export default function EMITracker() {
     const [duration, setDuration] = useState('');
     const [reminder, setReminder] = useState('');
 
-    async function handleSubmit(e) {
+    async function handleSubmit() {
         
         const response = await axios.post(`${Serverport()}/api/setEMI`, {
             date,
@@ -31,6 +31,8 @@ export default function EMITracker() {
                         type="date"
                         name="name"
                         id="name"
+                        value={date}
+                        onChange={(e) => setDate(e.target.value)}
                         className="w-full h-12 border-2 border-slate-100 rounded-lg p-2"
                         required
                     />
@@ -41,6 +43,8 @@ export default function EMITracker() {
                         name="duration"
                         className="w-full h-12 border-2 border-slate-100 rounded-lg p-2"
                         id="duration"
+                        onChange={(e) => setDuration(e.target.value)}
+                        value={duration}
                     >
                         <option value="">Select Duration</option>
                         <option value="3m">3 Months</option>
@@ -60,6 +64,8 @@ export default function EMITracker() {
                         name="reminder-duration"
                         className="w-full h-12 border-2 border-slate-100 rounded-lg p-2"
                         id="duration"
+                        onChange={(e) => setReminder(e.target.value)}
+                        value={reminder}
                     >
                         <option value="">Select Reminder Duration</option>
                         <option value="1d">1 Day</option>
