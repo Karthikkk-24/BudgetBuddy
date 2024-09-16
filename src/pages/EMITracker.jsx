@@ -22,6 +22,10 @@ export default function EMITracker() {
             setReminder('');
         } else {
             console.log(response.data);
+            alert(response.data.message);
+            setDate('');
+            setDuration('');
+            setReminder('');
         }
     }
 
