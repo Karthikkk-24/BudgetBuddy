@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
-import Serverport from '../components/Serverport';
+import BaseURL from '../components/BaseURL';
 
 export default function EMITracker() {
     const [date, setDate] = useState('');
@@ -9,7 +9,7 @@ export default function EMITracker() {
 
     async function handleSubmit() {
         
-        const response = await axios.post(`${Serverport()}/api/setEMI`, {
+        const response = await axios.post(`${BaseURL()}/api/setEMI`, {
             date,
             duration,
             reminder

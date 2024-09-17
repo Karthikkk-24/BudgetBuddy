@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import BaseURL from '../components/BaseURL';
 import ExpenseTable from '../components/ExpenseTable';
-import Serverport from '../components/Serverport';
 
 export default function Expenses() {
     const [expenseCategories, setExpenseCategories] = useState([]);
@@ -20,7 +20,7 @@ export default function Expenses() {
     const getExpenseCategories = async () => {
         try {
             const response = await axios.post(
-                `${Serverport()}/api/finance/getExpenseCategories`,
+                `${BaseURL()}/api/finance/getExpenseCategories`,
                 {
                     user,
                 }
@@ -41,7 +41,7 @@ export default function Expenses() {
     const handleExpenseSubmit = async () => {
         try {
             const response = await axios.post(
-                `${Serverport()}/api/finance/addExpense`,
+                `${BaseURL()}/api/finance/addExpense`,
                 {
                     user,
                     expenseName,

@@ -12,7 +12,7 @@ export default function TodoItem({ title, status, id }) {
             const newStatus = !status;
             setCheckStatus(newStatus);
             console.log('status', newStatus);
-            const response = await axios.post(`${Serverport()}/api/users/updateTodo`, {
+            const response = await axios.post(`${BaseURL()}/api/users/updateTodo`, {
                 id,
                 status: 'completed'
             });

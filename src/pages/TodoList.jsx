@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Serverport from '../components/Serverport';
+import BaseURL from '../components/BaseURL';
 import TodoItem from '../components/TodoItem';
 
 export default function TodoList() {
@@ -24,7 +24,7 @@ export default function TodoList() {
             }
 
             const response = await axios.post(
-                `${Serverport()}/api/users/insertTodo`,
+                `${BaseURL()}/api/users/insertTodo`,
                 {
                     todoTitle,
                     user,
@@ -52,7 +52,7 @@ export default function TodoList() {
     const fetchTodos = async () => {
         try {
             const response = await axios.post(
-                `${Serverport()}/api/users/getPendingTodos`,
+                `${BaseURL()}/api/users/getPendingTodos`,
                 {
                     user,
                 }

@@ -16,7 +16,7 @@ export default function ExpenseTable({ refresh }) {
     const getAllExpenses = async () => {
         try {
             const response = await axios.post(
-                `${Serverport()}/api/finance/getAllExpense`,
+                `${BaseURL()}/api/finance/getAllExpense`,
                 {
                     user,
                 }

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Serverport from '../components/Serverport';
+import BaseURL from '../components/BaseURL';
 
 export default function IncomeCategories() {
     const [incomeCategoryName, setIncomeCategoryName] = useState('');
@@ -15,7 +15,7 @@ export default function IncomeCategories() {
     const getIncomeCategories = async () => {
         try {
             const response = await axios.post(
-                `${Serverport()}/api/finance/getIncomeCategories`,
+                `${BaseURL()}/api/finance/getIncomeCategories`,
                 {
                     user,
                 }
@@ -40,7 +40,7 @@ export default function IncomeCategories() {
             }
 
             const response = await axios.post(
-                `${Serverport()}/api/finance/addIncomeCategory`,
+                `${BaseURL()}/api/finance/addIncomeCategory`,
                 {
                     user,
                     incomeCategoryName,

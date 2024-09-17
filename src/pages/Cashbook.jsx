@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Serverport from '../components/Serverport';
+import BaseURL from '../components/BaseURL';
 
 export default function Cashbook() {
     const [cashbookEntries, setCashbookEntries] = useState([]);
@@ -14,7 +14,7 @@ export default function Cashbook() {
     const fetchCashbookEntries = async () => {
         try {
             const response = await axios.post(
-                `${Serverport()}/api/finance/getCashbookEntries`,
+                `${BaseURL()}/api/finance/getCashbookEntries`,
                 {
                     user,
                 }

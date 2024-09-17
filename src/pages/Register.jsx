@@ -13,7 +13,7 @@ export default function Register() {
 
     const handleSubmit = async () => {
         try {
-            const response = await axios.post(`${Serverport()}/api/users/register`, {
+            const response = await axios.post(`${BaseURL()}/api/users/register`, {
                 username, 
                 email, 
                 password

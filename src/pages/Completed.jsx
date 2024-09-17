@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Serverport from '../components/Serverport';
+import BaseURL from '../components/BaseURL';
 import TodoItem from '../components/TodoItem';
 
 export default function Completed() {
@@ -11,7 +11,7 @@ export default function Completed() {
     const fetchTodos = async () => {
         try {
             const response = await axios.post(
-                `${Serverport()}/api/users/getCompletedTodos`,
+                `${BaseURL()}/api/users/getCompletedTodos`,
                 {
                     user,
                 }

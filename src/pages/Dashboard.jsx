@@ -2,8 +2,8 @@ import axios from 'axios';
 import 'chart.js/auto';
 import { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
+import BaseURL from '../components/BaseURL';
 import DashboardSmallBox from '../components/DashboardSmallBox';
-import Serverport from '../components/Serverport';
 
 export default function Dashboard() {
     const [pendingTask, setPendingTask] = useState(0);
@@ -27,7 +27,7 @@ export default function Dashboard() {
     const getTodayTasks = async () => {
         try {
             const response = await axios.post(
-                `${Serverport()}/api/users/getTodayTasks`,
+                `${BaseURL()}/api/users/getTodayTasks`,
                 {
                     user,
                 }
@@ -47,7 +47,7 @@ export default function Dashboard() {
     const getCompletedTasks = async () => {
         try {
             const response = await axios.post(
-                `${Serverport()}/api/users/getTodayCompletedTasks`,
+                `${BaseURL()}/api/users/getTodayCompletedTasks`,
                 {
                     user,
                 }
@@ -67,7 +67,7 @@ export default function Dashboard() {
     const getTotalExpenses = async () => {
         try {
             const response = await axios.post(
-                `${Serverport()}/api/finance/getTotalExpenses`,
+                `${BaseURL()}/api/finance/getTotalExpenses`,
                 {
                     user,
                 }
@@ -94,7 +94,7 @@ export default function Dashboard() {
     const getTotalIncome = async () => {
         try {
             const response = await axios.post(
-                `${Serverport()}/api/finance/getTotalIncome`,
+                `${BaseURL()}/api/finance/getTotalIncome`,
                 {
                     user,
                 }
@@ -119,7 +119,7 @@ export default function Dashboard() {
     const fetchIncomeData = async () => {
         try {
             const response = await axios.post(
-                `${Serverport()}/api/finance/getIncomeData`,
+                `${BaseURL()}/api/finance/getIncomeData`,
                 { user }
             );
             if (response.status === 200) {
@@ -133,7 +133,7 @@ export default function Dashboard() {
     const fetchExpenseData = async () => {
         try {
             const response = await axios.post(
-                `${Serverport()}/api/finance/getExpenseData`,
+                `${BaseURL()}/api/finance/getExpenseData`,
                 { user }
             );
             if (response.status === 200) {

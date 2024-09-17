@@ -16,7 +16,7 @@ export default function IncomeTable({ refresh }) {
     const getAllIncome = async () => {
         try {
             const response = await axios.post(
-                `${Serverport()}/api/finance/getAllIncome`,
+                `${BaseURL()}/api/finance/getAllIncome`,
                 {
                     user,
                 }
