@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 
 const PublicRoute = () => {
     const location = useLocation();
+    const navigate = useNavigate();
 
     useEffect(() => {
         checkLogin();
@@ -16,7 +17,7 @@ const PublicRoute = () => {
         } else {
             localStorage.clear();
             sessionStorage.clear();
-            window.location.href = '/login';
+            navigate('/login');
         }
     }
 
