@@ -13,7 +13,7 @@ const PublicRoute = () => {
 
     function checkLogin() {
         if (localStorage.getItem('token')) {
-            // window.location.href = '/dashboard';
+            // navigate('/dashboard');
         } else {
             localStorage.clear();
             sessionStorage.clear();
