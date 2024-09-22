@@ -15,7 +15,7 @@ export default function Sidebar({ currentPath }) {
             <div className="w-full h-full flex flex-col items-start justify-start">
                 <SidebarItem
                     title="Home"
-                    active={currentPath === '/dashboard'}
+                    active={currentPath === '/dashboard' || currentPath === '/'}
                     icon="🏠"
                     route={'/dashboard'}
                 />

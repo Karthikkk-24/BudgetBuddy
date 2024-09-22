@@ -21,8 +21,8 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/main" element={<Main />} />
                 <Route path="/" element={<PublicRoute />}>
+                    <Route path='/' element={<Dashboard />} />
                     <Route path='/dashboard'  element={<Dashboard />} /> 
-                    <Route path='/'  element={<Dashboard />} /> 
                     <Route path='/income' element={<Income />} />
                     <Route path='/expenses' element={<Expenses />} />
                     <Route path='/todo-list' element={<TodoList />} />
