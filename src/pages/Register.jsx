@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Serverport from "../components/Serverport";
+import BaseURL from "../components/BaseURL";
 
 export default function Register() {
 

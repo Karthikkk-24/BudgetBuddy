@@ -1,7 +1,7 @@
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import Serverport from './Serverport';
+import BaseURL from './BaseURL';
 
 
 export default function IncomeTable({ refresh }) {

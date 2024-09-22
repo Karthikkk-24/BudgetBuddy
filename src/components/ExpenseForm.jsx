@@ -1,8 +1,9 @@
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import BaseURL from '../components/BaseURL';
 
-const ExpenseForm = ({ onExpenseAdded }) => {
+export default function ExpenseForm ({ onExpenseAdded }) {
     const [expenseCategories, setExpenseCategories] = useState([]);
     const [amount, setAmount] = useState(0);
     const [expenseName, setExpenseName] = useState('');
@@ -125,4 +126,8 @@ const ExpenseForm = ({ onExpenseAdded }) => {
             </button>
         </div>
     );
+}
+
+ExpenseForm.propTypes = {
+    onExpenseAdded: PropTypes.func
 };
