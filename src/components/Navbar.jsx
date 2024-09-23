@@ -16,7 +16,7 @@ export default function Navbar() {
             <div>
                 <Link to="/dashboard" className="flex items-center justify-center gap-2">Home</Link>
             </div>
-            <button className="text-white flex gap-2 items-center justify-center font-bold bg-red-500 rounded-md h-12 w-auto px-7" onClick={handleLogout}>
+            <button className="text-white flex gap-2 items-center justify-center font-bold bg-red-500 rounded-md h-12 w-auto px-7 hover:scale-105 transition-all" onClick={handleLogout}>
                 Logout <IoLogOutOutline />
             </button>
         </div>
