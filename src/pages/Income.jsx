@@ -32,7 +32,6 @@ export default function Income() {
                 console.log(response.data);
                 console.log('incomeCategory', response.data.incomeCategories);
                 setIncomeCategories(response.data.incomeCategories);
-
             }
         } catch (error) {
             console.log(error);
@@ -70,81 +69,90 @@ export default function Income() {
 
     return (
         <div className="flex w-full h-full items-start justify-start gap-10 bg-background px-4 py-6 flex-col">
-            <h1 className="text-5xl">Income</h1>
-            <div className="flex flex-col items-start justify-start w-full h-auto gap-4">
-                <div className="flex items-center justify-center w-full h-auto gap-6">
-                    <div className="w-1/2 flex flex-col items-start justify-start gap-2">
-                        <label className="font-semibold text-sm">
-                            Income Name
-                        </label>
-                        <input
-                            type="text"
-                            name="name"
-                            value={incomeName}
-                            onChange={(e) => setIncomeName(e.target.value)}
-                            id="name"
-                            className="w-full h-12 border-2 border-slate-100 rounded-lg p-2"
-                            required
-                        />
+            <div className='w-full h-full border-2 p-6 rounded-2xl shadow-xl'>
+                <h1 className="text-5xl mb-4">Income</h1>
+                <div className="flex flex-col items-start justify-start w-full h-auto gap-4 mb-4">
+                    <div className="flex items-center justify-center w-full h-auto gap-6">
+                        <div className="w-1/2 flex flex-col items-start justify-start gap-2">
+                            <label className="font-semibold text-sm">
+                                Income Name
+                            </label>
+                            <input
+                                type="text"
+                                name="name"
+                                value={incomeName}
+                                onChange={(e) => setIncomeName(e.target.value)}
+                                id="name"
+                                className="w-full h-12 border-2 border-slate-100 rounded-lg p-2"
+                                required
+                            />
+                        </div>
+                        <div className="w-1/2 flex flex-col items-start justify-start gap-2">
+                            <label className="font-semibold text-sm">
+                                Date
+                            </label>
+                            <input
+                                type="date"
+                                name="name"
+                                value={incomeDate}
+                                onChange={(e) => setIncomeDate(e.target.value)}
+                                id="name"
+                                className="w-full h-12 border-2 border-slate-100 rounded-lg p-2"
+                                required
+                            />
+                        </div>
                     </div>
-                    <div className="w-1/2 flex flex-col items-start justify-start gap-2">
-                        <label className="font-semibold text-sm">Date</label>
-                        <input
-                            type="date"
-                            name="name"
-                            value={incomeDate}
-                            onChange={(e) => setIncomeDate(e.target.value)}
-                            id="name"
-                            className="w-full h-12 border-2 border-slate-100 rounded-lg p-2"
-                            required
-                        />
+                    <div className="flex items-center justify-center w-full h-auto gap-6">
+                        <div className="w-1/2 flex flex-col items-start justify-start gap-2">
+                            <label className="font-semibold text-sm">
+                                Select Income Category
+                            </label>
+                            <select
+                                name="category"
+                                id="category"
+                                className="w-full h-12 border-2 border-slate-100 rounded-lg p-2"
+                                required
+                                value={incomeCategory}
+                                onChange={(e) =>
+                                    setIncomeCategory(e.target.value)
+                                }
+                            >
+                                <option value="">Select Income Category</option>
+                                {incomeCategories.map((category) => (
+                                    <option
+                                        key={category._id}
+                                        value={category._id}
+                                    >
+                                        {category.title}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="w-1/2 flex flex-col items-start justify-start gap-2">
+                            <label className="font-semibold text-sm">
+                                Enter Amount
+                            </label>
+                            <input
+                                type="number"
+                                name="amount"
+                                id="amount"
+                                value={amount}
+                                onChange={(e) => setAmount(e.target.value)}
+                                className="w-full h-12 border-2 border-slate-100 rounded-lg p-2"
+                                required
+                            />
+                        </div>
                     </div>
+                    <button
+                        onClick={handleIncomeSubmit}
+                        type="submit"
+                        className="w-auto h-auto hover:scale-110 transition-all bg-primary rounded-lg text-white px-5 py-3 flex items-center justify-center gap-1"
+                    >
+                        Submit
+                    </button>
                 </div>
-                <div className="flex items-center justify-center w-full h-auto gap-6">
-                    <div className="w-1/2 flex flex-col items-start justify-start gap-2">
-                        <label className="font-semibold text-sm">
-                            Select Income Category
-                        </label>
-                        <select
-                            name="category"
-                            id="category"
-                            className="w-full h-12 border-2 border-slate-100 rounded-lg p-2"
-                            required
-                            value={incomeCategory}
-                            onChange={(e) => setIncomeCategory(e.target.value)}
-                        >
-                            <option value="">Select Income Category</option>
-                            {incomeCategories.map((category) => (
-                                <option key={category._id} value={category._id}>
-                                    {category.title}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                    <div className="w-1/2 flex flex-col items-start justify-start gap-2">
-                        <label className="font-semibold text-sm">
-                            Enter Amount
-                        </label>
-                        <input
-                            type="number"
-                            name="amount"
-                            id="amount"
-                            value={amount}
-                            onChange={(e) => setAmount(e.target.value)}
-                            className="w-full h-12 border-2 border-slate-100 rounded-lg p-2"
-                            required
-                        />
-                    </div>
-                </div>
-                <button
-                    onClick={handleIncomeSubmit}
-                    type="submit"
-                    className="w-auto h-auto hover:scale-110 transition-all bg-primary rounded-lg text-white px-5 py-3 flex items-center justify-center gap-1"
-                >
-                    Submit
-                </button>
+                <IncomeTable refresh={refresh} />
             </div>
-            <IncomeTable refresh={refresh} />
         </div>
     );
 }

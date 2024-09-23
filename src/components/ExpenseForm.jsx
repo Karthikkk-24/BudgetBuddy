@@ -58,7 +58,7 @@ export default function ExpenseForm ({ onExpenseAdded }) {
     };
 
     return (
-        <div className="flex flex-col items-start justify-start w-full h-auto gap-4">
+        <div className="flex flex-col items-start justify-start w-full h-auto gap-4 mb-4">
             <div className="flex items-center justify-center w-full h-auto gap-6">
                 <div className="w-1/2 flex flex-col items-start justify-start gap-2">
                     <label className="font-semibold text-sm">Expense Name</label>
