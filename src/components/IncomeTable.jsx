@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import BaseURL from './BaseURL';
 
 
-export default function IncomeTable({ refresh }) {
+export default function IncomeTable({ refresh = false }) {
     const [incomeData, setIncomeData] = useState([]);
 
     useEffect(() => {

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import BaseURL from './BaseURL';
 
 
-export default function ExpenseTable({ refresh }) {
+export default function ExpenseTable({ refresh = false }) {
     const [expenseData, setExpenseData] = useState([]);
 
     useEffect(() => {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import BaseURL from '../components/BaseURL';
 
-export default function ExpenseForm ({ onExpenseAdded }) {
+export default function ExpenseForm ({ onExpenseAdded = () => {} }) {
     const [expenseCategories, setExpenseCategories] = useState([]);
     const [amount, setAmount] = useState(0);
     const [expenseName, setExpenseName] = useState('');

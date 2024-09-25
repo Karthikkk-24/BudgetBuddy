@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import BaseURL from './BaseURL';
 
-export default function TodoItem({ title, status, id }) {
+export default function TodoItem({ title = '', status = false, id = 0 }) {
 
     const [checkStatus, setCheckStatus] = useState(status);
 

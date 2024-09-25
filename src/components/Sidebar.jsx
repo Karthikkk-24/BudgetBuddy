@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import SidebarItem from './SidebarItem';
 
-export default function Sidebar({ currentPath }) {
+export default function Sidebar({ currentPath = '' }) {
     return (
         <div className="w-full h-full flex items-start justify-start gap-4 flex-col px-3 py-5 bg-text custom-pattern">
             <div className="w-full h-auto flex flex-col items-start justify-start">

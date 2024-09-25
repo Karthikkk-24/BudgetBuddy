@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-export default function SidebarItem({ title, icon, route, active }) {
+export default function SidebarItem({ title = '', icon = '', route = '', active = false }) {
     return (
         <Link
             to={route}
