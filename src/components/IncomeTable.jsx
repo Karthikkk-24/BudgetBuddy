@@ -11,7 +11,7 @@ export default function IncomeTable({ refresh = false }) {
         getAllIncome();
     }, [refresh]);
 
-    const user = localStorage.getItem('user_id');
+    const user = sessionStorage.getItem('user_id');
 
     const getAllIncome = async () => {
         try {

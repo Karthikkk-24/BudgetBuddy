@@ -14,7 +14,7 @@ export default function ExpenseForm ({ onExpenseAdded = () => {} }) {
         getExpenseCategories();
     }, []);
 
-    const user = localStorage.getItem('user_id');
+    const user = sessionStorage.getItem('user_id');
 
     const getExpenseCategories = async () => {
         try {

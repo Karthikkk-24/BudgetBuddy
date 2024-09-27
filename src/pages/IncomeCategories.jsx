@@ -10,7 +10,7 @@ export default function IncomeCategories() {
         getIncomeCategories();
     }, []);
 
-    const user = localStorage.getItem('user_id');
+    const user = sessionStorage.getItem('user_id');
 
     const getIncomeCategories = async () => {
         try {

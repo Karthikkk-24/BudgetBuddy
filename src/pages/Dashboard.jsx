@@ -22,7 +22,7 @@ export default function Dashboard() {
         fetchIncomeData();
     }, []);
 
-    const user = localStorage.getItem('user_id');
+    const user = sessionStorage.getItem('user_id');
 
     const getTodayTasks = async () => {
         try {

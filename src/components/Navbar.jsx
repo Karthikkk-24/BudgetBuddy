@@ -6,7 +6,7 @@ export default function Navbar() {
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        localStorage.clear();
+        sessionStorage.clear();
         sessionStorage.clear();
         navigate('/login');
     }

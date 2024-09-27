@@ -7,7 +7,7 @@ export default function TodoList() {
     const [todoTitle, setTodoTitle] = useState('');
     const [allTodos, setAllTodos] = useState([]);
 
-    const user = localStorage.getItem('user_id');
+    const user = sessionStorage.getItem('user_id');
 
     const getFormattedDate = () => {
         const date = new Date();

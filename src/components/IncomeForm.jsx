@@ -14,7 +14,7 @@ export default function IncomeForm({ onIncomeAdded }) {
         getIncomeCategories();
     }, []);
 
-    const user = localStorage.getItem('user_id');
+    const user = sessionStorage.getItem('user_id');
 
     const getIncomeCategories = async () => {
         try {

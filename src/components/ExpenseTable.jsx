@@ -11,7 +11,7 @@ export default function ExpenseTable({ refresh = false }) {
         getAllExpenses();
     }, [refresh]);
 
-    const user = localStorage.getItem('user_id');
+    const user = sessionStorage.getItem('user_id');
 
     const getAllExpenses = async () => {
         try {

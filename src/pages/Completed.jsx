@@ -6,7 +6,7 @@ import TodoItem from '../components/TodoItem';
 export default function Completed() {
     const [allTodos, setAllTodos] = useState([]);
 
-    const user = localStorage.getItem('user_id');
+    const user = sessionStorage.getItem('user_id');
 
     const fetchTodos = async () => {
         try {

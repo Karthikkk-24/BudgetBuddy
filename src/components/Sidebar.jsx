@@ -9,7 +9,7 @@ export default function Sidebar({ currentPath = '' }) {
                     Expense Tracker
                 </h1>
                 <h4 className="text-xl text-white font-semibold">
-                    Welcome {localStorage.getItem('user')}
+                    Welcome {sessionStorage.getItem('user')}
                 </h4>
             </div>
             <div className="w-full h-full flex flex-col items-start justify-start">

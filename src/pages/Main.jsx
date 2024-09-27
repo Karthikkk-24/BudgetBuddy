@@ -10,7 +10,7 @@ export default function Main() {
     const navigate = useNavigate();
 
     function checkLogin() {
-        if (!localStorage.getItem('token')) {
+        if (!sessionStorage.getItem('token')) {
             navigate('/login');
         } else {
             navigate('/dashboard');

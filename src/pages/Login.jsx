@@ -19,11 +19,11 @@ export default function Login() {
 
             console.log(response.data);
             if (response.status === 200) {
-                localStorage.clear();
+                sessionStorage.clear();
                 console.log(response.data);
-                localStorage.setItem('token', response.data.token);
-                localStorage.setItem('user', response.data.user.username);
-                localStorage.setItem('user_id', response.data.user.uniqueId);
+                sessionStorage.setItem('token', response.data.token);
+                sessionStorage.setItem('user', response.data.user.username);
+                sessionStorage.setItem('user_id', response.data.user.uniqueId);
                 navigate('/dashboard');
             }
 

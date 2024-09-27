@@ -9,7 +9,7 @@ export default function Cashbook() {
         fetchCashbookEntries();
     }, []);
 
-    const user = localStorage.getItem('user_id');
+    const user = sessionStorage.getItem('user_id');
 
     const fetchCashbookEntries = async () => {
         try {

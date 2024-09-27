@@ -12,10 +12,10 @@ const PublicRoute = () => {
     }, []);
 
     function checkLogin() {
-        if (localStorage.getItem('token')) {
+        if (sessionStorage.getItem('token')) {
             // navigate('/dashboard');
         } else {
-            localStorage.clear();
+            sessionStorage.clear();
             sessionStorage.clear();
             navigate('/login');
         }
