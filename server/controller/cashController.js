@@ -1,0 +1,296 @@
+import CashbookModel from '../models/cashbookModel.js';
+import ExpenseCategoryModel from '../models/expenseCategoryModel.js';
+import ExpenseModel from '../models/expenseModel.js';
+import IncomeCategoryModel from '../models/incomeCategoryModel.js';
+import IncomeModel from '../models/incomeModel.js';
+
+// const getFormattedDate = () => {
+//     const date = new Date();
+//     const year = date.getFullYear();
+//     const month = String(date.getMonth() + 1).padStart(2, '0');
+//     const day = String(date.getDate()).padStart(2, '0');
+//     return `${year}-${month}-${day}`;
+// };
+
+export const addExpenseCategory = async (req, res) => {
+    try {
+        const { user, expenseCategoryName } = req.body;
+
+        const expenseCategory = await ExpenseCategoryModel.create({
+            username: user,
+            title: expenseCategoryName,
+        });
+
+        res.status(201).json({ expenseCategory });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const getExpenseCategories = async (req, res) => {
+    try {
+        const { user } = req.body;
+
+        const expenseCategories = await ExpenseCategoryModel.find({
+            username: user,
+        });
+
+        res.status(200).json({ expenseCategories });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const addIncomeCategory = async (req, res) => {
+    try {
+        const { user, incomeCategoryName } = req.body;
+
+        console.log('req.body', req.body);
+
+        const incomeCategory = await IncomeCategoryModel.create({
+            username: user,
+            title: incomeCategoryName,
+        });
+
+        res.status(201).json({ incomeCategory });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const getIncomeCategories = async (req, res) => {
+    try {
+        const { user } = req.body;
+
+        const incomeCategories = await IncomeCategoryModel.find({
+            username: user,
+        });
+
+        res.status(200).json({ incomeCategories });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const addIncome = async (req, res) => {
+    try {
+        const { user, incomeName, incomeCategory, amount, incomeDate } =
+            req.body;
+
+        const income = await IncomeModel.create({
+            username: user,
+            title: incomeName,
+            category: incomeCategory,
+            amount,
+            date: incomeDate,
+        });
+
+        const addEntryToCashbook = await CashbookModel.create({
+            username: user,
+            title: incomeName,
+            category: incomeCategory,
+            heading: 'Income',
+            amount,
+            date: incomeDate,
+        });
+
+        console.log('addEntryToCashbook', addEntryToCashbook);
+
+        res.status(201).json({ income });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const addExpense = async (req, res) => {
+    try {
+        const { user, expenseName, expenseCategory, amount, expenseDate } =
+            req.body;
+
+        const expense = await ExpenseModel.create({
+            username: user,
+            title: expenseName,
+            category: expenseCategory,
+            amount,
+            date: expenseDate,
+        });
+
+        const addEntryToCashbook = await CashbookModel.create({
+            username: user,
+            title: expenseName,
+            category: expenseCategory,
+            heading: 'Expense',
+            amount,
+            date: expenseDate,
+        });
+
+        console.log('addEntryToCashbook', addEntryToCashbook);
+
+        res.status(201).json({ expense });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const getAllIncome = async (req, res) => {
+    try {
+        const { user } = req.body;
+
+        const incomes = await IncomeModel.find({ username: user });
+
+        const getIncome = incomes.map(async (income) => {
+            const findCategoryName = await IncomeCategoryModel.find({
+                _id: income.category,
+            });
+
+            return {
+                id: income._id,
+                title: income.title,
+                category: findCategoryName[0].title,
+                amount: income.amount,
+                date: income.date,
+            };
+        });
+
+        res.status(200).json({ getIncome: await Promise.all(getIncome) });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const getAllExpense = async (req, res) => {
+    try {
+        const { user } = req.body;
+
+        const expenses = await ExpenseModel.find({ username: user });
+
+        const getExpense = expenses.map(async (expense) => {
+            const findCategoryName = await ExpenseCategoryModel.find({
+                _id: expense.category,
+            });
+
+            return {
+                id: expense._id,
+                title: expense.title,
+                category: findCategoryName[0].title,
+                amount: expense.amount,
+                date: expense.date,
+            };
+        });
+
+        res.status(200).json({ getExpense: await Promise.all(getExpense) });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const getCashbookEntries = async (req, res) => {
+    try {
+        const { user } = req.body;
+
+        const cashbookEntries = await CashbookModel.find({ username: user });
+
+        res.status(200).json({ cashbookEntries });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const getTotalIncome = async (req, res) => {
+    try {
+        const { user } = req.body;
+
+        const totalIncome = await CashbookModel.aggregate([
+            { $match: { username: user, heading: 'Income' } },
+            { $group: { _id: null, total: { $sum: '$amount' } } },
+        ]);
+
+        res.status(200).json({ totalIncome });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const getTotalExpenses = async (req, res) => {
+    try {
+        const { user } = req.body;
+
+        const totalExpenses = await CashbookModel.aggregate([
+            { $match: { username: user, heading: 'Expense' } },
+            { $group: { _id: null, total: { $sum: '$amount' } } },
+        ]);
+
+        res.status(200).json({ totalExpenses });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const getIncomeData = async (req, res) => {
+    try {
+        const { user } = req.body;
+
+        const incomeData = await IncomeModel.aggregate([
+            { $match: { username: user } },
+            {
+                $group: {
+                    _id: '$date',
+                    totalAmount: { $sum: '$amount' },
+                },
+            },
+            {
+                $project: {
+                    _id: 0,
+                    date: '$_id',
+                    amount: '$totalAmount',
+                },
+            },
+            { $sort: { date: 1 } },
+        ]);
+
+        res.status(200).json({ incomeData });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const getExpenseData = async (req, res) => {
+    try {
+        const { user } = req.body;
+
+        const expenseData = await ExpenseModel.aggregate([
+            { $match: { username: user } },
+            {
+                $group: {
+                    _id: '$date',
+                    totalAmount: { $sum: '$amount' },
+                },
+            },
+            {
+                $project: {
+                    _id: 0,
+                    date: '$_id',
+                    amount: '$totalAmount',
+                },
+            },
+            { $sort: { date: 1 } },
+        ]);
+
+        res.status(200).json({ expenseData });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: error.message });
+    }
+};
