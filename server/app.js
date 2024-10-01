@@ -5,6 +5,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import authRouter from './routes/authRoutes.js';
 import cashRouter from './routes/cashRoutes.js';
+import emiRouter from './routes/emiRoutes.js';
 import todoRouter from './routes/todoRoutes.js';
 
 const app = express();
@@ -23,6 +24,7 @@ mongoose.connect('mongodb://localhost:27017/budgetbuddy', {
 app.use('/api/users', authRouter);
 app.use('/api/users', todoRouter);
 app.use('/api/finance', cashRouter);
+app.use('/api/emi', emiRouter);
 
 const PORT = 3000;
 
