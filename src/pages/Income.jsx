@@ -1,6 +1,6 @@
 import { useState } from 'react';
+import IncomeForm from '../components/IncomeForm';
 import IncomeTable from '../components/IncomeTable';
-import IncomeForm from './IncomeForm';
 
 export default function Income() {
     const [refresh, setRefresh] = useState(false);
