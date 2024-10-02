@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs';
+import { body, validationResult } from 'express-validator';
 import authTokenModel from '../models/authTokenModel.js';
 import User from '../models/userModel.js';
 
@@ -57,7 +58,28 @@ function getFormattedDate() {
     return `${year}-${month}-${day}`;
 }
 
+export const validateRegistration = [
+    body('username')
+        .trim()
+        .isLength({ min: 3, max: 30 })
+        .withMessage('Username must be between 3 and 30 characters'),
+    body('email').trim().isEmail().withMessage('Invalid email address'),
+    body('password')
+        .isLength({ min: 8 })
+        .withMessage('Password must be at least 8 characters long'),
+];
+
+export const validateLogin = [
+    body('email').trim().isEmail().withMessage('Invalid email address'),
+    body('password').notEmpty().withMessage('Password is required'),
+];
+
 export const register = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     const { username, email, password } = req.body;
 
     try {
@@ -86,7 +108,10 @@ export const register = async (req, res) => {
 
         await newUser.save();
         console.log('User registered successfully:', newUser.email);
-        res.status(201).json(newUser);
+        res.status(201).json({
+            message: 'User registered successfully',
+            userId: newUser._id,
+        });
     } catch (err) {
         console.error('Registration error:', err);
         res.status(500).json({ message: 'Server error' });
@@ -94,6 +119,11 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     const { email, password } = req.body;
     console.log('Login attempt - email:', email);
 
@@ -105,9 +135,6 @@ export const login = async (req, res) => {
         }
 
         console.log('User found:', user.email);
-        console.log('Stored hashed password:', user.password);
-        console.log('Input password:', password);
-
         console.log('Comparing passwords...');
         const isMatch = await bcrypt.compare(password, user.password);
         console.log('Password match result:', isMatch);
@@ -120,7 +147,11 @@ export const login = async (req, res) => {
         const token = await createUserAuthToken(user);
         console.log('Login successful, token generated:', token);
 
-        res.status(200).json({ message: 'Login successful', user, token });
+        res.status(200).json({
+            message: 'Login successful',
+            userId: user._id,
+            token,
+        });
     } catch (err) {
         console.error('Login error:', err);
         res.status(500).json({ message: 'Server error' });
