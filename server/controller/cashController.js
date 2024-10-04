@@ -5,7 +5,7 @@ import ExpenseModel from '../models/expenseModel.js';
 import IncomeCategoryModel from '../models/incomeCategoryModel.js';
 import IncomeModel from '../models/incomeModel.js';
 
-// Validation middleware
+
 const validateRequest = (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -14,7 +14,7 @@ const validateRequest = (req, res, next) => {
     next();
 };
 
-// Validation rules
+
 const categoryValidationRules = [
     body('user').notEmpty().withMessage('User is required'),
     body('expenseCategoryName')

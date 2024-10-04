@@ -1,12 +1,12 @@
 import express from 'express';
-import * as emiController from '../controllers/emiController.js';
+import { createEMI, deleteEMI, getAllEMIs, getEMIById, updateEMI } from '../controller/emiController.js';
 
 const router = express.Router();
 
-router.post('/', emiController.createEMI);
-router.get('/', emiController.getAllEMIs);
-router.get('/:id', emiController.getEMIById);
-router.put('/:id', emiController.updateEMI);
-router.delete('/:id', emiController.deleteEMI);
+router.post('/', createEMI);
+router.get('/', getAllEMIs);
+router.get('/:id', getEMIById);
+router.put('/:id', updateEMI);
+router.delete('/:id', deleteEMI);
 
 export default router;
