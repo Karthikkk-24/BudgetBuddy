@@ -1,4 +1,3 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import BaseURL from '../components/BaseURL';
@@ -38,29 +37,32 @@ export default function Cashbook() {
     };
 
     return (
-        <div className="min-h-screen bg-zinc-900 p-6">
-            <Card className="bg-zinc-800 border-none shadow-2xl">
-                <CardHeader className="pb-4">
-                    <CardTitle className="text-4xl font-bold text-white tracking-tight">
+        <div className="min-h-screen bg-zinc-900 p-4 md:p-6">
+            <div className="bg-zinc-800 rounded-xl shadow-2xl overflow-hidden">
+                {/* Header Section */}
+                <div className="p-6 border-b border-zinc-700">
+                    <h1 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
                         Cashbook
-                    </CardTitle>
-                </CardHeader>
-                <CardContent>
+                    </h1>
+                </div>
+
+                {/* Table Container */}
+                <div className="p-6">
                     <div className="rounded-lg overflow-hidden shadow-xl">
                         <div className="overflow-x-auto">
-                            <table className="w-full border-collapse">
+                            <table className="w-full border-collapse bg-zinc-800">
                                 <thead>
-                                    <tr className="bg-blue-500">
-                                        <th className="px-6 py-4 text-left text-sm font-semibold text-white">
+                                    <tr>
+                                        <th className="bg-blue-500 px-6 py-4 text-left text-sm font-semibold text-white transition-colors duration-150 border-b border-blue-600">
                                             Date
                                         </th>
-                                        <th className="px-6 py-4 text-left text-sm font-semibold text-white">
+                                        <th className="bg-blue-500 px-6 py-4 text-left text-sm font-semibold text-white transition-colors duration-150 border-b border-blue-600">
                                             Title
                                         </th>
-                                        <th className="px-6 py-4 text-left text-sm font-semibold text-white">
+                                        <th className="bg-blue-500 px-6 py-4 text-left text-sm font-semibold text-white transition-colors duration-150 border-b border-blue-600">
                                             Debit
                                         </th>
-                                        <th className="px-6 py-4 text-left text-sm font-semibold text-white">
+                                        <th className="bg-blue-500 px-6 py-4 text-left text-sm font-semibold text-white transition-colors duration-150 border-b border-blue-600">
                                             Credit
                                         </th>
                                     </tr>
@@ -71,21 +73,33 @@ export default function Cashbook() {
                                             key={entry._id}
                                             className="hover:bg-zinc-700 transition-colors duration-150"
                                         >
-                                            <td className="px-6 py-4 text-sm text-zinc-300">
+                                            <td className="px-6 py-4 text-sm text-zinc-300 whitespace-nowrap">
                                                 {formatDate(entry.date)}
                                             </td>
                                             <td className="px-6 py-4 text-sm text-zinc-300">
                                                 {entry.title}
                                             </td>
                                             <td className="px-6 py-4 text-sm text-zinc-300">
-                                                {entry.heading === 'Expense'
-                                                    ? entry.amount
-                                                    : 0}
+                                                {entry.heading === 'Expense' ? (
+                                                    <span className="text-red-400">
+                                                        {entry.amount}
+                                                    </span>
+                                                ) : (
+                                                    <span className="text-zinc-500">
+                                                        0
+                                                    </span>
+                                                )}
                                             </td>
                                             <td className="px-6 py-4 text-sm text-zinc-300">
-                                                {entry.heading === 'Income'
-                                                    ? entry.amount
-                                                    : 0}
+                                                {entry.heading === 'Income' ? (
+                                                    <span className="text-green-400">
+                                                        {entry.amount}
+                                                    </span>
+                                                ) : (
+                                                    <span className="text-zinc-500">
+                                                        0
+                                                    </span>
+                                                )}
                                             </td>
                                         </tr>
                                     ))}
@@ -93,8 +107,8 @@ export default function Cashbook() {
                             </table>
                         </div>
                     </div>
-                </CardContent>
-            </Card>
+                </div>
+            </div>
         </div>
     );
 }
